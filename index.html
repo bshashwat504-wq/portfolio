@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">[Student Name] | B.Tech CSE (AI & ML) - JECRC University</title>
+  <meta name="description" content="Personal portfolio of [Student Name], 1st-Year B.Tech Computer Science & Engineering (Artificial Intelligence & Machine Learning) student at JECRC University, Jaipur." />
+  <meta name="keywords" content="Portfolio, AI, Machine Learning, JECRC University, B.Tech CSE, Jaipur, Python, Web Development, Student Developer" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              950: '#040711',
+              900: '#080C1E',
+              850: '#0B1127',
+              800: '#101835',
+              700: '#17224D',
+              600: '#1E2D65',
+            },
+            cyber: {
+              blue: '#3B82F6',
+              purple: '#8B5CF6',
+              cyan: '#06B6D4',
+              emerald: '#10B981',
+            }
+          },
+          fontFamily: {
+            sans: ['Outfit', 'Plus Jakarta Sans', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          boxShadow: {
+            'neon-blue': '0 0 25px -5px rgba(59, 130, 246, 0.4)',
+            'neon-purple': '0 0 25px -5px rgba(139, 92, 246, 0.4)',
+            'neon-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.4)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #040711;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #17224D;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3B82F6;
+    }
+    .glass-card {
+      background: rgba(11, 17, 39, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card-hover:hover {
+      background: rgba(16, 24, 53, 0.85);
+      border-color: rgba(59, 130, 246, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(59, 130, 246, 0.25);
+    }
+    .glass-nav {
+      background: rgba(4, 7, 17, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .text-gradient-cyan {
+      background: linear-gradient(135deg, #67E8F9 0%, #3B82F6 50%, #A855F7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-purple {
+      background: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-dark-950 text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
+
+  <!-- Interactive Neural Canvas -->
+  <canvas id="neuralCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-55"></canvas>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none max-w-sm">
+    <div class="glass-card px-4 py-3 rounded-xl border border-emerald-500/40 shadow-2xl flex items-center gap-3 bg-dark-900/95 text-emerald-300 text-xs font-medium">
+      <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+      <span id="toast-message">Notification message</span>
+    </div>
+  </div>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    
+    <!-- Navigation Bar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        
+        <!-- Brand Logo -->
+        <a href="#home" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 p-[1px] shadow-neon-blue/30 shadow-md">
+            <div class="w-full h-full bg-dark-900 rounded-[11px] flex items-center justify-center group-hover:bg-dark-850 transition-colors">
+              <span id="nav-initials" class="font-mono font-bold text-base text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
+                SN
+              </span>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-semibold text-slate-100 text-sm sm:text-base tracking-tight group-hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+              <span id="nav-name">[Student Name]</span>
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            </span>
+            <span class="text-[11px] text-slate-400 font-mono">
+              JECRC • AI & ML
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-1 bg-dark-900/70 backdrop-blur-md p-1.5 rounded-full border border-slate-800/80 shadow-inner">
+          <a href="#home" class="nav-item px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white transition-all bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20">Home</a>
+          <a href="#about" class="nav-item px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">About</a>
+          <a href="#skills" class="nav-item px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">Skills</a>
+          <a href="#projects" class="nav-item px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">Projects</a>
+          <a href="#education" class="nav-item px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">Education</a>
+          <a href="#achievements" class="nav-item px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">Achievements</a>
+          <a href="#learning" class="nav-item px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">Learning</a>
+          <a href="#contact" class="nav-item px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">Contact</a>
+        </nav>
+
+        <!-- Right Action Buttons -->
+        <div class="hidden sm:flex items-center gap-3">
+          <button onclick="openCustomizer()" class="px-3 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-all flex items-center gap-1.5 shadow-sm" title="Quickly personalize details live">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span>Customize</span>
+          </button>
+
+          <button onclick="openResumeModal()" class="relative group px-4 py-2 rounded-xl text-xs font-semibold text-white overflow-hidden shadow-lg shadow-blue-600/20 transition-all active:scale-95">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 transition-all duration-300 group-hover:opacity-90"></div>
+            <div class="relative flex items-center gap-1.5">
+              <i data-lucide="file-down" class="w-3.5 h-3.5"></i>
+              <span>Resume</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Hamburger -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <button onclick="openCustomizer()" class="p-2 rounded-lg text-slate-300 bg-slate-800/60 border border-slate-700/60 sm:hidden">
+            <i data-lucide="edit-3" class="w-4 h-4 text-cyan-400"></i>
+          </button>
+          <button id="mobile-toggle" onclick="toggleMobileMenu()" class="p-2 rounded-xl text-slate-300 hover:text-white bg-dark-900 border border-slate-800">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden glass-nav border-t border-slate-800/80 px-4 pt-3 pb-6 space-y-2">
+        <a href="#home" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60">Home</a>
+        <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60">About</a>
+        <a href="#skills" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60">Skills</a>
+        <a href="#projects" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60">Projects</a>
+        <a href="#education" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60">Education</a>
+        <a href="#achievements" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60">Achievements</a>
+        <a href="#learning" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60">Learning Journey</a>
+        <a href="#contact" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60">Contact</a>
+        <div class="pt-2">
+          <button onclick="toggleMobileMenu(); openResumeModal();" class="w-full py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 flex items-center justify-center gap-2">
+            <i data-lucide="file-down" class="w-4 h-4"></i>
+            <span>Download Resume</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      
+      <!-- HERO SECTION -->
+      <section id="home" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+          <!-- Hero Left Column -->
+          <div class="lg:col-span-7 flex flex-col items-start text-left space-y-6">
+            
+            <!-- Live Status Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 shadow-md backdrop-blur-md">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span class="text-xs font-medium text-slate-300">
+                1st Year B.Tech CSE (AI & ML) • JECRC University
+              </span>
+            </div>
+
+            <!-- Main Heading -->
+            <div class="space-y-2">
+              <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                Hi, I'm <span id="hero-name" class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">[Student Name]</span>
+              </h1>
+              <div class="h-9 sm:h-10 flex items-center">
+                <span id="typewriter" class="font-mono text-lg sm:text-2xl text-cyan-400 font-semibold">&gt; AI & Machine Learning Student</span>
+                <span class="w-2.5 h-6 bg-cyan-400 ml-1.5 animate-pulse inline-block"></span>
+              </div>
+            </div>
+
+            <p class="text-sm sm:text-base font-medium text-slate-400">
+              <span id="hero-role">B.Tech CSE | Artificial Intelligence & Machine Learning</span> — 
+              <span class="text-slate-200">1st Year Student at JECRC University, Jaipur</span>
+            </p>
+
+            <p id="hero-desc" class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl bg-dark-900/40 p-4 rounded-2xl border border-slate-800/60 backdrop-blur-sm">
+              Passionate about technology, artificial intelligence, and problem solving. Currently building my foundation in programming, computer science, and AI/ML while exploring new technologies and developing meaningful projects.
+            </p>
+
+            <!-- Dual CTA Buttons -->
+            <div class="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto">
+              <a href="#projects" class="relative group px-6 py-3.5 rounded-xl font-semibold text-sm text-white overflow-hidden shadow-lg shadow-blue-600/30 transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 w-full sm:w-auto">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 group-hover:opacity-90 transition-opacity"></div>
+                <span class="relative z-10 flex items-center gap-2">
+                  View My Projects
+                  <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </a>
+
+              <a href="#contact" class="px-6 py-3.5 rounded-xl font-semibold text-sm text-slate-200 bg-slate-900/80 hover:bg-slate-800/90 border border-slate-700/80 hover:border-slate-600 transition-all hover:text-white flex items-center justify-center gap-2 w-full sm:w-auto shadow-md">
+                <i data-lucide="mail" class="w-4 h-4 text-cyan-400"></i>
+                <span>Contact Me</span>
+              </a>
+            </div>
+
+            <!-- Social Links & Campus Tag -->
+            <div class="flex items-center gap-4 pt-4 border-t border-slate-800/70 w-full">
+              <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Connect:</span>
+              <div class="flex items-center gap-2.5">
+                <a id="hero-github" href="https://github.com/[Your-GitHub-Username]" target="_blank" rel="noreferrer" class="p-2.5 rounded-xl bg-slate-900/80 hover:bg-blue-600/20 text-slate-400 hover:text-cyan-300 border border-slate-800 hover:border-cyan-500/40 transition-all hover:-translate-y-0.5" title="GitHub">
+                  <i data-lucide="github" class="w-4 h-4"></i>
+                </a>
+                <a id="hero-linkedin" href="https://linkedin.com/in/[Your-LinkedIn-Username]" target="_blank" rel="noreferrer" class="p-2.5 rounded-xl bg-slate-900/80 hover:bg-blue-600/20 text-slate-400 hover:text-blue-400 border border-slate-800 hover:border-blue-500/40 transition-all hover:-translate-y-0.5" title="LinkedIn">
+                  <i data-lucide="linkedin" class="w-4 h-4"></i>
+                </a>
+                <a id="hero-email" href="mailto:student@example.com" class="p-2.5 rounded-xl bg-slate-900/80 hover:bg-purple-600/20 text-slate-400 hover:text-purple-400 border border-slate-800 hover:border-purple-500/40 transition-all hover:-translate-y-0.5" title="Email">
+                  <i data-lucide="mail" class="w-4 h-4"></i>
+                </a>
+              </div>
+              <div class="ml-auto hidden sm:flex items-center gap-1.5 text-xs text-slate-400 font-mono">
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                <span>Jaipur, RJ</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hero Right Column: AI / Tech Code Widget -->
+          <div class="lg:col-span-5 relative">
+            <div className="relative mx-auto max-w-md lg:max-w-none">
+              <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500/30 via-blue-600/30 to-purple-600/30 blur-xl opacity-70"></div>
+              
+              <div class="relative glass-card rounded-2xl p-5 sm:p-6 shadow-2xl border border-slate-700/70 overflow-hidden">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                    <span class="ml-2 text-xs font-mono text-slate-400 flex items-center gap-1">
+                      <i data-lucide="terminal" class="w-3 h-3 text-cyan-400"></i>
+                      jecrc_aiml_core.py
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">
+                    running
+                  </span>
+                </div>
+
+                <div class="space-y-3 font-mono text-xs sm:text-[13px] leading-relaxed">
+                  <p class="text-slate-400"><span class="text-purple-400">class</span> <span class="text-cyan-300">AIEngineeringStudent</span>:</p>
+                  <div class="pl-4 space-y-1.5 border-l border-slate-800/80">
+                    <p class="text-slate-300"><span class="text-purple-400">def</span> <span class="text-blue-300">__init__</span>(self):</p>
+                    <div class="pl-4 space-y-1 text-slate-300">
+                      <p>self.name = <span id="code-name" class="text-emerald-300">"[Student Name]"</span></p>
+                      <p>self.university = <span class="text-emerald-300">"JECRC University"</span></p>
+                      <p>self.year = <span class="text-amber-300">1</span> <span class="text-slate-500"># B.Tech CSE (AI&ML)</span></p>
+                      <p>self.focus = [<span class="text-cyan-300">"Python"</span>, <span class="text-cyan-300">"AI/ML"</span>, <span class="text-cyan-300">"DSA"</span>]</p>
+                      <p>self.mindset = <span class="text-purple-300">"Continuous Growth"</span></p>
+                    </div>
+                    <p class="text-slate-300 pt-1"><span class="text-purple-400">def</span> <span class="text-blue-300">mission</span>(self):</p>
+                    <div class="pl-4 text-slate-300">
+                      <p><span class="text-purple-400">return</span> <span class="text-emerald-300">"Solve real problems through intelligent code"</span></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-5 pt-4 border-t border-slate-800 grid grid-cols-3 gap-2 text-center">
+                  <div class="p-2 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                    <div class="flex items-center justify-center text-cyan-400 mb-1">
+                      <i data-lucide="cpu" class="w-4 h-4"></i>
+                    </div>
+                    <div class="text-xs font-bold text-slate-200">1st Year</div>
+                    <div class="text-[10px] text-slate-400">Undergrad</div>
+                  </div>
+
+                  <div class="p-2 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                    <div class="flex items-center justify-center text-blue-400 mb-1">
+                      <i data-lucide="brain" class="w-4 h-4"></i>
+                    </div>
+                    <div class="text-xs font-bold text-slate-200">AI & ML</div>
+                    <div class="text-[10px] text-slate-400">Specialization</div>
+                  </div>
+
+                  <div class="p-2 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                    <div class="flex items-center justify-center text-purple-400 mb-1">
+                      <i data-lucide="code" class="w-4 h-4"></i>
+                    </div>
+                    <div class="text-xs font-bold text-slate-200">Jaipur</div>
+                    <div class="text-[10px] text-slate-400">JECRC Univ</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT ME SECTION -->
+      <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="absolute top-1/2 left-0 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center space-y-3 mb-16">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/40 text-cyan-400 text-xs font-mono uppercase tracking-wider">
+              <i data-lucide="user" class="w-3.5 h-3.5"></i>
+              <span>Know Me Better</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              About <span class="text-gradient-cyan">Me</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
+              A 1st-year engineering student dedicated to mastering computer science and modern artificial intelligence.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <!-- Left: Profile Card -->
+            <div class="lg:col-span-5">
+              <div class="relative group mx-auto max-w-sm">
+                <div class="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-cyan-500/40 via-blue-600/40 to-purple-600/40 blur-lg opacity-60 group-hover:opacity-100 transition duration-500"></div>
+
+                <div class="relative glass-card rounded-2xl p-6 border border-slate-700/80 text-center space-y-5 shadow-xl">
+                  <div class="relative mx-auto w-36 h-36 rounded-2xl p-1 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 shadow-neon-blue">
+                    <div class="w-full h-full bg-dark-900 rounded-[14px] flex flex-col items-center justify-center relative overflow-hidden">
+                      <div class="w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-cyan-400 mb-1">
+                        <i data-lucide="brain" class="w-9 h-9 animate-pulse"></i>
+                      </div>
+                      <span class="text-[11px] font-mono text-slate-400">AI & ML Explorer</span>
+                    </div>
+                    <span class="absolute bottom-1 right-1 w-4 h-4 bg-emerald-500 border-2 border-dark-950 rounded-full"></span>
+                  </div>
+
+                  <div class="space-y-1">
+                    <h3 id="about-name" class="text-xl font-bold text-white tracking-tight">[Student Name]</h3>
+                    <p class="text-xs font-mono text-cyan-400">B.Tech CSE (AI & ML)</p>
+                  </div>
+
+                  <div class="pt-2 border-t border-slate-800 space-y-2 text-left text-xs text-slate-300">
+                    <div class="flex items-center gap-2.5 p-2 rounded-xl bg-slate-900/50 border border-slate-800/60">
+                      <i data-lucide="graduation-cap" class="w-4 h-4 text-blue-400 shrink-0"></i>
+                      <span class="font-medium text-slate-200">JECRC University, Jaipur</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 p-2 rounded-xl bg-slate-900/50 border border-slate-800/60">
+                      <i data-lucide="map-pin" class="w-4 h-4 text-rose-400 shrink-0"></i>
+                      <span class="font-medium text-slate-300">Jaipur, Rajasthan, India</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 p-2 rounded-xl bg-slate-900/50 border border-slate-800/60">
+                      <i data-lucide="sparkles" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                      <span class="font-medium text-slate-300">Open to Collaborations & Learning</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Academic Narrative & 4 Stats -->
+            <div class="lg:col-span-7 space-y-6">
+              <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-700/60 space-y-5">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-100">
+                  Passionate About Building The Future with AI
+                </h3>
+
+                <p id="about-bio" class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  I am a motivated 1st-year B.Tech Computer Science and Engineering student specializing in Artificial Intelligence & Machine Learning at JECRC University, Jaipur. With a continuous learning mindset, I am passionate about core programming, software development, and understanding how data and intelligent algorithms can solve real-world challenges.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
+                  <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-3">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                    <div>
+                      <h4 class="text-xs font-semibold text-slate-200">1st Year B.Tech CSE</h4>
+                      <p class="text-[11px] text-slate-400 mt-0.5">Focusing on Computer Science & AI/ML fundamentals</p>
+                    </div>
+                  </div>
+                  <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-3">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                    <div>
+                      <h4 class="text-xs font-semibold text-slate-200">JECRC University</h4>
+                      <p class="text-[11px] text-slate-400 mt-0.5">Active student at the premier tech campus in Jaipur</p>
+                    </div>
+                  </div>
+                  <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-3">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                    <div>
+                      <h4 class="text-xs font-semibold text-slate-200">Passionate Programmer</h4>
+                      <p class="text-[11px] text-slate-400 mt-0.5">Building problem-solving intuition with Python & C/C++</p>
+                    </div>
+                  </div>
+                  <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start gap-3">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                    <div>
+                      <h4 class="text-xs font-semibold text-slate-200">Continuous Learner</h4>
+                      <p class="text-[11px] text-slate-400 mt-0.5">Exploring modern web stacks, data science & AI tools</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4 Academic Statistics Section -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+                <div class="glass-card glass-card-hover rounded-2xl p-4 border border-slate-800 text-center flex flex-col justify-center items-center">
+                  <span class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">1st Year</span>
+                  <span class="text-xs font-semibold text-slate-200 mt-1">Current Academic Year</span>
+                  <span class="text-[10px] font-mono text-slate-400 mt-0.5">B.Tech CSE (AI & ML)</span>
+                </div>
+                <div class="glass-card glass-card-hover rounded-2xl p-4 border border-slate-800 text-center flex flex-col justify-center items-center">
+                  <span class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">AI & ML</span>
+                  <span class="text-xs font-semibold text-slate-200 mt-1">Specialization</span>
+                  <span class="text-[10px] font-mono text-slate-400 mt-0.5">Artificial Intelligence</span>
+                </div>
+                <div class="glass-card glass-card-hover rounded-2xl p-4 border border-slate-800 text-center flex flex-col justify-center items-center">
+                  <span class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Growing</span>
+                  <span class="text-xs font-semibold text-slate-200 mt-1">Projects</span>
+                  <span class="text-[10px] font-mono text-slate-400 mt-0.5">Practical Portfolio</span>
+                </div>
+                <div class="glass-card glass-card-hover rounded-2xl p-4 border border-slate-800 text-center flex flex-col justify-center items-center">
+                  <span class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Continuous</span>
+                  <span class="text-xs font-semibold text-slate-200 mt-1">Learning</span>
+                  <span class="text-[10px] font-mono text-slate-400 mt-0.5">Mindset & Growth</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS SECTION -->
+      <section id="skills" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center space-y-3 mb-12">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-800/40 text-cyan-400 text-xs font-mono uppercase tracking-wider">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <span>Technical Competencies</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Skills & <span class="text-gradient-cyan">Tooling</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+              Clear foundational competencies developed through first-year university coursework, coding practice, and independent exploration.
+            </p>
+            <div class="inline-block pt-1">
+              <span class="text-xs font-mono text-slate-400 bg-slate-900/80 px-3 py-1 rounded-full border border-slate-800">
+                * Indicating foundational & intermediate academic proficiency
+              </span>
+            </div>
+          </div>
+
+          <!-- Category Filter Buttons -->
+          <div class="flex flex-wrap justify-center gap-2 mb-12">
+            <button onclick="filterSkills('all')" class="skill-tab-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20 transition-all">All Categories</button>
+            <button onclick="filterSkills('programming')" class="skill-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-dark-900/80 text-slate-400 hover:text-slate-200 border border-slate-800 transition-all">Programming</button>
+            <button onclick="filterSkills('web')" class="skill-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-dark-900/80 text-slate-400 hover:text-slate-200 border border-slate-800 transition-all">Web Development</button>
+            <button onclick="filterSkills('aiml')" class="skill-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-dark-900/80 text-slate-400 hover:text-slate-200 border border-slate-800 transition-all">AI & Machine Learning</button>
+            <button onclick="filterSkills('tools')" class="skill-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-dark-900/80 text-slate-400 hover:text-slate-200 border border-slate-800 transition-all">Tools & Environment</button>
+          </div>
+
+          <!-- Skills 4-Box Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Category 1: Programming -->
+            <div class="skill-card-block glass-card glass-card-hover rounded-2xl p-6 sm:p-7 border border-slate-800 flex flex-col justify-between" data-category="programming">
+              <div>
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="code" class="w-4 h-4 text-blue-400"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-white tracking-tight">Programming</h3>
+                    <p class="text-xs text-slate-400">Core languages for logic building and algorithmic thinking</p>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">Python</span>
+                      <span class="text-[11px] font-mono text-cyan-300">Beginner / Intermediate (75%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" style="width: 75%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">C / C++</span>
+                      <span class="text-[11px] font-mono text-cyan-300">CS Foundations (65%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" style="width: 65%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">Java</span>
+                      <span class="text-[11px] font-mono text-cyan-300">OOP Fundamentals (50%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" style="width: 50%"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-5 mt-6 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                <span class="flex items-center gap-1.5 text-emerald-400"><i data-lucide="check-circle" class="w-3 h-3"></i> Core Coursework</span>
+                <span>Year 1 Practice</span>
+              </div>
+            </div>
+
+            <!-- Category 2: Web Development -->
+            <div class="skill-card-block glass-card glass-card-hover rounded-2xl p-6 sm:p-7 border border-slate-800 flex flex-col justify-between" data-category="web">
+              <div>
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="layout" class="w-4 h-4 text-cyan-400"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-white tracking-tight">Web Development</h3>
+                    <p class="text-xs text-slate-400">Building responsive and modern web interfaces</p>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">HTML & CSS</span>
+                      <span class="text-[11px] font-mono text-cyan-300">Responsive Layouts (80%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500" style="width: 80%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">JavaScript</span>
+                      <span class="text-[11px] font-mono text-cyan-300">DOM & Interactivity (65%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500" style="width: 65%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">React & Tailwind</span>
+                      <span class="text-[11px] font-mono text-cyan-300">Component Architecture (60%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500" style="width: 60%"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-5 mt-6 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                <span class="flex items-center gap-1.5 text-emerald-400"><i data-lucide="check-circle" class="w-3 h-3"></i> Modern Frontend</span>
+                <span>Active Projects</span>
+              </div>
+            </div>
+
+            <!-- Category 3: AI & Machine Learning -->
+            <div class="skill-card-block glass-card glass-card-hover rounded-2xl p-6 sm:p-7 border border-slate-800 flex flex-col justify-between" data-category="aiml">
+              <div>
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="brain" class="w-4 h-4 text-purple-400"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-white tracking-tight">AI & Machine Learning</h3>
+                    <p class="text-xs text-slate-400">Exploring algorithms, data, and intelligent systems</p>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">Machine Learning Fundamentals</span>
+                      <span class="text-[11px] font-mono text-cyan-300">Classification & Regression (60%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-purple-400 to-blue-500" style="width: 60%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">Data Analysis (NumPy & Pandas)</span>
+                      <span class="text-[11px] font-mono text-cyan-300">Preprocessing & EDA (65%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-purple-400 to-blue-500" style="width: 65%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">Python for AI & Basic Neural Nets</span>
+                      <span class="text-[11px] font-mono text-cyan-300">Perceptrons & Math (55%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-purple-400 to-blue-500" style="width: 55%"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-5 mt-6 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                <span class="flex items-center gap-1.5 text-emerald-400"><i data-lucide="check-circle" class="w-3 h-3"></i> Core Specialization</span>
+                <span>AI/ML Roadmap</span>
+              </div>
+            </div>
+
+            <!-- Category 4: Tools & Environment -->
+            <div class="skill-card-block glass-card glass-card-hover rounded-2xl p-6 sm:p-7 border border-slate-800 flex flex-col justify-between" data-category="tools">
+              <div>
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="wrench" class="w-4 h-4 text-emerald-400"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-white tracking-tight">Tools & Environment</h3>
+                    <p class="text-xs text-slate-400">Developer workflows, version control and IDEs</p>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">Git & GitHub</span>
+                      <span class="text-[11px] font-mono text-cyan-300">Version Control (75%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-cyan-500" style="width: 75%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">VS Code</span>
+                      <span class="text-[11px] font-mono text-cyan-300">Primary Editor (85%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-cyan-500" style="width: 85%"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-xs mb-1.5">
+                      <span class="font-semibold text-slate-200">Jupyter Notebook</span>
+                      <span class="text-[11px] font-mono text-cyan-300">ML Prototyping (70%)</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-900 border border-slate-800 p-0.5"><div class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-cyan-500" style="width: 70%"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-5 mt-6 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                <span class="flex items-center gap-1.5 text-emerald-400"><i data-lucide="check-circle" class="w-3 h-3"></i> Daily Workflow</span>
+                <span>Essential Stack</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS SHOWCASE SECTION -->
+      <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="absolute top-1/3 right-0 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center space-y-3 mb-16">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-800/40 text-purple-300 text-xs font-mono uppercase tracking-wider">
+              <i data-lucide="folder-git-2" class="w-3.5 h-3.5"></i>
+              <span>Practical Implementations</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Featured <span class="text-gradient-purple">Projects</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+              Hands-on projects developed to apply computer science theory, AI/ML models, and web development fundamentals.
+            </p>
+          </div>
+
+          <!-- 3 Project Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Project 01 -->
+            <div class="glass-card glass-card-hover rounded-2xl border border-slate-800 flex flex-col justify-between overflow-hidden group">
+              <div>
+                <div class="relative h-44 bg-gradient-to-br from-slate-900 via-dark-850 to-indigo-950/70 p-5 flex flex-col justify-between border-b border-slate-800 overflow-hidden">
+                  <div class="absolute inset-0 bg-grid-pattern opacity-40"></div>
+                  <div class="relative z-10 flex items-center justify-between">
+                    <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-lg bg-dark-950/80 text-cyan-400 border border-cyan-500/30">
+                      Project #01
+                    </span>
+                    <span class="text-[11px] font-medium text-slate-300 bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700">
+                      Web Development
+                    </span>
+                  </div>
+                  <div class="relative z-10 inline-flex items-center gap-2 text-cyan-300 font-mono text-xs">
+                    <i data-lucide="code-2" class="w-4 h-4 text-blue-400"></i>
+                    <span>Responsive & Modern UI</span>
+                  </div>
+                </div>
+
+                <div class="p-6 space-y-4">
+                  <h3 class="text-xl font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors">
+                    Personal Portfolio Website
+                  </h3>
+                  <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                    A responsive personal portfolio website showcasing my skills, education, projects, and learning journey in Computer Science (AI & ML).
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 pt-2">
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">React</span>
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">Tailwind CSS</span>
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">JavaScript</span>
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">Vite</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-6 pt-0 border-t border-slate-800/60 mt-4 flex items-center gap-3">
+                <a href="https://github.com/[Your-GitHub-Username]/portfolio" target="_blank" rel="noreferrer" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                  <span>GitHub</span>
+                </a>
+                <a href="#home" class="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 transition-all">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Live Demo</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Project 02 -->
+            <div class="glass-card glass-card-hover rounded-2xl border border-slate-800 flex flex-col justify-between overflow-hidden group">
+              <div>
+                <div class="relative h-44 bg-gradient-to-br from-slate-900 via-dark-850 to-purple-950/70 p-5 flex flex-col justify-between border-b border-slate-800 overflow-hidden">
+                  <div class="absolute inset-0 bg-grid-pattern opacity-40"></div>
+                  <div class="relative z-10 flex items-center justify-between">
+                    <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-lg bg-dark-950/80 text-purple-300 border border-purple-500/30">
+                      Project #02
+                    </span>
+                    <span class="text-[11px] font-medium text-slate-300 bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700">
+                      Artificial Intelligence
+                    </span>
+                  </div>
+                  <div class="relative z-10 inline-flex items-center gap-2 text-cyan-300 font-mono text-xs">
+                    <i data-lucide="cpu" class="w-4 h-4 text-purple-400"></i>
+                    <span>Data Classification Model</span>
+                  </div>
+                </div>
+
+                <div class="p-6 space-y-4">
+                  <h3 class="text-xl font-bold text-white tracking-tight group-hover:text-purple-300 transition-colors">
+                    AI/ML Beginner Project
+                  </h3>
+                  <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                    A beginner-level artificial intelligence or machine learning project exploring data preprocessing, exploratory analysis, and model classification.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 pt-2">
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">Python</span>
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">Pandas</span>
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">Scikit-Learn</span>
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">Jupyter</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-6 pt-0 border-t border-slate-800/60 mt-4 flex items-center gap-3">
+                <a href="https://github.com/[Your-GitHub-Username]/aiml-beginner-project" target="_blank" rel="noreferrer" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                  <span>GitHub</span>
+                </a>
+                <button onclick="previewProjectModal('02')" class="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 transition-all">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Live Demo</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Project 03 -->
+            <div class="glass-card glass-card-hover rounded-2xl border border-slate-800 flex flex-col justify-between overflow-hidden group">
+              <div>
+                <div class="relative h-44 bg-gradient-to-br from-slate-900 via-dark-850 to-emerald-950/70 p-5 flex flex-col justify-between border-b border-slate-800 overflow-hidden">
+                  <div class="absolute inset-0 bg-grid-pattern opacity-40"></div>
+                  <div class="relative z-10 flex items-center justify-between">
+                    <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-lg bg-dark-950/80 text-emerald-400 border border-emerald-500/30">
+                      Project #03
+                    </span>
+                    <span class="text-[11px] font-medium text-slate-300 bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700">
+                      Python Development
+                    </span>
+                  </div>
+                  <div class="relative z-10 inline-flex items-center gap-2 text-cyan-300 font-mono text-xs">
+                    <i data-lucide="terminal" class="w-4 h-4 text-emerald-400"></i>
+                    <span>Problem Solving & Automation</span>
+                  </div>
+                </div>
+
+                <div class="p-6 space-y-4">
+                  <h3 class="text-xl font-bold text-white tracking-tight group-hover:text-emerald-300 transition-colors">
+                    Python Problem-Solving Project
+                  </h3>
+                  <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                    A Python-based project demonstrating programming logic, algorithmic problem solving, file manipulation, and modular clean architecture.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 pt-2">
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">Python 3</span>
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">Algorithms</span>
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">OOP</span>
+                    <span class="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800">CLI</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-6 pt-0 border-t border-slate-800/60 mt-4 flex items-center gap-3">
+                <a href="https://github.com/[Your-GitHub-Username]/python-project" target="_blank" rel="noreferrer" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                  <span>GitHub</span>
+                </a>
+                <button onclick="previewProjectModal('03')" class="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 transition-all">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Live Demo</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION TIMELINE SECTION -->
+      <section id="education" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-5xl mx-auto">
+          <div class="text-center space-y-3 mb-16">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-400 text-xs font-mono uppercase tracking-wider">
+              <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+              <span>Academic Timeline</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Education <span class="text-gradient-cyan">Milestones</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
+              Formal education pathway and ongoing engineering degree program.
+            </p>
+          </div>
+
+          <!-- Vertical Timeline -->
+          <div class="relative border-l-2 border-slate-800 ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-12">
+            
+            <!-- College / Degree -->
+            <div class="relative group">
+              <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-6 h-6 rounded-full bg-dark-950 border-2 border-cyan-400 flex items-center justify-center shadow-neon-blue group-hover:scale-125 transition-transform duration-300">
+                <div class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
+              </div>
+
+              <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 border border-slate-800 space-y-4">
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-cyan-950/80 text-cyan-400 border border-cyan-800/40 font-semibold">
+                      Currently Enrolled
+                    </span>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight mt-2">
+                      JECRC University
+                    </h3>
+                    <p class="text-sm font-semibold text-slate-200 mt-0.5">
+                      B.Tech — Computer Science Engineering
+                    </p>
+                    <p class="text-xs font-mono text-cyan-300 mt-0.5">
+                      Specialization: Artificial Intelligence & Machine Learning
+                    </p>
+                  </div>
+
+                  <div class="flex flex-col sm:items-end text-xs text-slate-400 space-y-1 font-mono">
+                    <div class="flex items-center gap-1.5">
+                      <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-400"></i>
+                      <span>1st Year (2025 - Present)</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-400"></i>
+                      <span>Jaipur, Rajasthan, India</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-3 border-t border-slate-800/80 space-y-2">
+                  <span class="text-xs font-semibold text-slate-300">Key Academic Focus:</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div class="flex items-center gap-2 text-xs text-slate-300 bg-slate-900/50 p-2 rounded-lg border border-slate-800">
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
+                      <span>Programming with Python & C/C++</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-slate-300 bg-slate-900/50 p-2 rounded-lg border border-slate-800">
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
+                      <span>Applied Mathematics & Linear Algebra for AI</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-slate-300 bg-slate-900/50 p-2 rounded-lg border border-slate-800">
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
+                      <span>Computer Science Fundamentals</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-slate-300 bg-slate-900/50 p-2 rounded-lg border border-slate-800">
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
+                      <span>AI/ML Technical Workshops & Campus Events</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Senior Secondary Education -->
+            <div class="relative group">
+              <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-6 h-6 rounded-full bg-dark-950 border-2 border-slate-600 flex items-center justify-center group-hover:scale-125 transition-transform duration-300">
+                <div class="w-2 h-2 rounded-full bg-slate-400"></div>
+              </div>
+
+              <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 border border-slate-800 space-y-4">
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-900 text-slate-300 border border-slate-800 font-semibold">
+                      Completed
+                    </span>
+                    <h3 id="edu-school" class="text-xl sm:text-2xl font-bold text-white tracking-tight mt-2">
+                      [School Name]
+                    </h3>
+                    <p class="text-sm font-semibold text-slate-200 mt-0.5">
+                      Class XII / Senior Secondary Education
+                    </p>
+                    <p class="text-xs font-mono text-slate-400 mt-0.5">
+                      Science Stream (Physics, Chemistry, Mathematics)
+                    </p>
+                  </div>
+
+                  <div class="flex flex-col sm:items-end text-xs text-slate-400 space-y-1 font-mono">
+                    <div class="flex items-center gap-1.5">
+                      <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-400"></i>
+                      <span>[Graduation Year]</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-400"></i>
+                      <span>[City, State]</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-3 border-t border-slate-800/80">
+                  <p class="text-xs text-slate-400">
+                    * Academic foundation in analytical problem solving, calculus, and introductory computing.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ACHIEVEMENTS & CERTIFICATIONS SECTION -->
+      <section id="achievements" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center space-y-3 mb-12">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/60 border border-amber-800/40 text-amber-300 text-xs font-mono uppercase tracking-wider">
+              <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
+              <span>Milestones & Growth</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Achievements & <span class="text-gradient-cyan">Certifications</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+              Recognitions, verified technical certifications, workshops, and hackathon participation milestones.
+            </p>
+          </div>
+
+          <!-- Achievements 4-Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="p-2 rounded-xl bg-slate-900 border border-slate-800">
+                      <i data-lucide="award" class="w-4 h-4 text-cyan-400"></i>
+                    </div>
+                    <span class="text-xs font-mono text-cyan-300">Certification</span>
+                  </div>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-slate-800/90 text-slate-300 border border-slate-700">2025 - 2026</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white tracking-tight">[Certification Name]</h3>
+                  <p class="text-xs font-semibold text-slate-300 mt-0.5">Issuing Organization / Platform (e.g. Coursera / NPTEL / Kaggle)</p>
+                </div>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  Completed comprehensive coursework covering core concepts and hands-on exercises.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                <span class="inline-flex items-center gap-1.5 text-emerald-400 font-mono text-[11px]">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Verified
+                </span>
+                <span class="text-slate-400 text-[11px] font-mono">Editable Placeholder</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="p-2 rounded-xl bg-slate-900 border border-slate-800">
+                      <i data-lucide="trophy" class="w-4 h-4 text-amber-400"></i>
+                    </div>
+                    <span class="text-xs font-mono text-amber-300">Hackathon / Competition</span>
+                  </div>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-slate-800/90 text-slate-300 border border-slate-700">2025 - 2026</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white tracking-tight">[Hackathon / Coding Competition Name]</h3>
+                  <p class="text-xs font-semibold text-slate-300 mt-0.5">University / Technical Society</p>
+                </div>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  Collaborated with peers to build innovative software solutions under timed competition conditions.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                <span class="inline-flex items-center gap-1.5 text-amber-400 font-mono text-[11px]">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Participant / Winner
+                </span>
+                <span class="text-slate-400 text-[11px] font-mono">Editable Placeholder</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="p-2 rounded-xl bg-slate-900 border border-slate-800">
+                      <i data-lucide="bookmark-check" class="w-4 h-4 text-purple-400"></i>
+                    </div>
+                    <span class="text-xs font-mono text-purple-300">Workshop</span>
+                  </div>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-slate-800/90 text-slate-300 border border-slate-700">2025 - 2026</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white tracking-tight">AI & Modern Web Development Workshop</h3>
+                  <p class="text-xs font-semibold text-slate-300 mt-0.5">JECRC University Tech Cell</p>
+                </div>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  Engaged in interactive training sessions on emerging tech stacks and machine learning workflows.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                <span class="inline-flex items-center gap-1.5 text-emerald-400 font-mono text-[11px]">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Completed
+                </span>
+                <span class="text-slate-400 text-[11px] font-mono">JECRC Campus</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="p-2 rounded-xl bg-slate-900 border border-slate-800">
+                      <i data-lucide="users" class="w-4 h-4 text-blue-400"></i>
+                    </div>
+                    <span class="text-xs font-mono text-blue-300">Academic Milestone</span>
+                  </div>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-slate-800/90 text-slate-300 border border-slate-700">1st Year</span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white tracking-tight">Active Member — AI & Coding Community</h3>
+                  <p class="text-xs font-semibold text-slate-300 mt-0.5">Department of CSE, JECRC University</p>
+                </div>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  Regularly participating in coding practice sessions, peer learning, and tech seminars.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                <span class="inline-flex items-center gap-1.5 text-emerald-400 font-mono text-[11px]">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Active
+                </span>
+                <span class="text-slate-400 text-[11px] font-mono">Student Member</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- LEARNING JOURNEY ("CURRENTLY LEARNING") -->
+      <section id="learning" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center space-y-3 mb-16">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-950/60 border border-indigo-800/40 text-indigo-300 text-xs font-mono uppercase tracking-wider">
+              <i data-lucide="book-open-check" class="w-3.5 h-3.5"></i>
+              <span>Active Curriculum</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Currently <span class="text-gradient-cyan">Learning</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+              My daily focus areas in Computer Science Engineering & Artificial Intelligence.
+            </p>
+          </div>
+
+          <!-- Motivational Quote Banner as requested -->
+          <div class="mb-14 relative max-w-3xl mx-auto">
+            <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 blur-md"></div>
+            <div class="relative glass-card rounded-2xl p-6 sm:p-7 border border-slate-700/70 text-center space-y-3">
+              <i data-lucide="quote" class="w-8 h-8 text-cyan-400/60 mx-auto"></i>
+              <p class="text-slate-200 text-base sm:text-lg font-medium italic leading-relaxed">
+                "I'm currently focused on strengthening my programming fundamentals and exploring how artificial intelligence can be used to solve real-world problems."
+              </p>
+              <div class="text-xs font-mono text-cyan-400 font-semibold tracking-wider">
+                — 1st Year B.Tech CSE (AI & ML) Philosophy
+              </div>
+            </div>
+          </div>
+
+          <!-- 6 Learning Modules -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-blue-500/30 bg-gradient-to-br from-blue-500/15 to-blue-600/5 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="code" class="w-5 h-5 text-blue-400"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-slate-950 text-slate-300 border border-slate-800">Active Study</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight">Python Programming</h3>
+                <p class="text-xs sm:text-sm text-slate-300">Mastering OOP, Clean Code conventions, and standard libraries for problem solving.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
+                <span class="flex items-center gap-1 text-cyan-400"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span> In Progress</span>
+                <span>Self-Paced & College</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-purple-500/30 bg-gradient-to-br from-purple-500/15 to-purple-600/5 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="binary" class="w-5 h-5 text-purple-400"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-slate-950 text-slate-300 border border-slate-800">Active Study</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight">Data Structures & Algorithms</h3>
+                <p class="text-xs sm:text-sm text-slate-300">Arrays, Linked Lists, Stacks, Queues, Searching, Sorting, and Time Complexity analysis.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
+                <span class="flex items-center gap-1 text-cyan-400"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span> In Progress</span>
+                <span>Core Engineering</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-cyan-500/30 bg-gradient-to-br from-cyan-500/15 to-cyan-600/5 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="brain" class="w-5 h-5 text-cyan-400"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-slate-950 text-slate-300 border border-slate-800">Active Study</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight">Machine Learning Concepts</h3>
+                <p class="text-xs sm:text-sm text-slate-300">Supervised learning, linear regression, classification metrics, and data science pipelines.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
+                <span class="flex items-center gap-1 text-cyan-400"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span> In Progress</span>
+                <span>Specialization</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-indigo-500/30 bg-gradient-to-br from-indigo-500/15 to-indigo-600/5 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="globe" class="w-5 h-5 text-indigo-400"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-slate-950 text-slate-300 border border-slate-800">Active Study</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight">Modern Web Development</h3>
+                <p class="text-xs sm:text-sm text-slate-300">Component architectures with React, state management, and modern responsive UI design.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
+                <span class="flex items-center gap-1 text-cyan-400"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span> In Progress</span>
+                <span>Frontend UI</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-emerald-500/30 bg-gradient-to-br from-emerald-500/15 to-emerald-600/5 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="git-branch" class="w-5 h-5 text-emerald-400"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-slate-950 text-slate-300 border border-slate-800">Active Study</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight">Git & GitHub</h3>
+                <p class="text-xs sm:text-sm text-slate-300">Branching strategies, pull requests, semantic commit conventions, and repository hosting.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
+                <span class="flex items-center gap-1 text-cyan-400"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span> In Progress</span>
+                <span>Workflow</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-pink-500/30 bg-gradient-to-br from-pink-500/15 to-pink-600/5 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-pink-400"></i>
+                  </div>
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-slate-950 text-slate-300 border border-slate-800">Active Study</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight">Generative AI Exploration</h3>
+                <p class="text-xs sm:text-sm text-slate-300">Prompt engineering, LLM API integrations, vector embeddings, and AI-assisted workflows.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
+                <span class="flex items-center gap-1 text-cyan-400"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span> In Progress</span>
+                <span>Emerging Tech</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- FUTURE GOALS ("WHAT I'M WORKING TOWARDS") -->
+      <section id="goals" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center space-y-3 mb-16">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-800/40 text-cyan-300 text-xs font-mono uppercase tracking-wider">
+              <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+              <span>Vision & Trajectory</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              What I'm <span class="text-gradient-cyan">Working Towards</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+              A structured roadmap from first-year foundational concepts to industry-ready AI/ML engineering capability.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4 group">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-2xl font-extrabold text-slate-400 group-hover:text-cyan-400 transition-colors">01</span>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-blue-950/70 text-blue-300 border border-blue-800/50">Year 1 - Year 2</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">Building Strong Programming Fundamentals</h3>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">Deepen understanding of Data Structures & Algorithms, Clean Code principles, and Object-Oriented Design.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+                <span class="flex items-center gap-1 text-slate-300"><i data-lucide="target" class="w-3.5 h-3.5 text-cyan-400"></i> Milestone</span>
+                <span class="text-cyan-400">→</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4 group">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-2xl font-extrabold text-slate-400 group-hover:text-cyan-400 transition-colors">02</span>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-blue-950/70 text-blue-300 border border-blue-800/50">Year 1 - Year 2</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">Developing Real-World Projects</h3>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">Build end-to-end full-stack and AI-powered applications that solve tangible student and societal problems.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+                <span class="flex items-center gap-1 text-slate-300"><i data-lucide="target" class="w-3.5 h-3.5 text-cyan-400"></i> Milestone</span>
+                <span class="text-cyan-400">→</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4 group">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-2xl font-extrabold text-slate-400 group-hover:text-cyan-400 transition-colors">03</span>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-blue-950/70 text-blue-300 border border-blue-800/50">Year 2 - Year 3</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">Learning Advanced AI/ML Concepts</h3>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">Progress into Deep Learning, Computer Vision, Natural Language Processing, and Neural Networks.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+                <span class="flex items-center gap-1 text-slate-300"><i data-lucide="target" class="w-3.5 h-3.5 text-cyan-400"></i> Milestone</span>
+                <span class="text-cyan-400">→</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4 group">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-2xl font-extrabold text-slate-400 group-hover:text-cyan-400 transition-colors">04</span>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-blue-950/70 text-blue-300 border border-blue-800/50">Ongoing</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">Hackathons & Open-Source</h3>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">Actively participate in university & national hackathons, contributing regularly to open-source codebases.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+                <span class="flex items-center gap-1 text-slate-300"><i data-lucide="target" class="w-3.5 h-3.5 text-cyan-400"></i> Milestone</span>
+                <span class="text-cyan-400">→</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4 group">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-2xl font-extrabold text-slate-400 group-hover:text-cyan-400 transition-colors">05</span>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-blue-950/70 text-blue-300 border border-blue-800/50">Year 2 - Year 3</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">Preparing for Internships</h3>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">Refine portfolio, algorithmic speed, and system thinking to secure competitive software & AI internships.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+                <span class="flex items-center gap-1 text-slate-300"><i data-lucide="target" class="w-3.5 h-3.5 text-cyan-400"></i> Milestone</span>
+                <span class="text-cyan-400">→</span>
+              </div>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between space-y-4 group">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-2xl font-extrabold text-slate-400 group-hover:text-cyan-400 transition-colors">06</span>
+                  <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-purple-950/70 text-purple-300 border border-purple-800/50">Career Vision</span>
+                </div>
+                <h3 class="text-lg font-bold text-white tracking-tight group-hover:text-purple-300 transition-colors">Becoming a Skilled AI/ML Engineer</h3>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">Bridge fundamental research with production engineering to build impactful, scalable AI products.</p>
+              </div>
+              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+                <span class="flex items-center gap-1 text-slate-300"><i data-lucide="target" class="w-3.5 h-3.5 text-purple-400"></i> Long-Term</span>
+                <span class="text-purple-400">★</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT SECTION -->
+      <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="absolute bottom-0 left-1/3 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center space-y-3 mb-16">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-800/40 text-cyan-300 text-xs font-mono uppercase tracking-wider">
+              <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+              <span>Get In Touch</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Let's Build Something <span class="text-gradient-cyan">Together</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
+              Have an idea, project, or opportunity? I'd love to connect and learn from new experiences.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- Contact Info Column -->
+            <div class="lg:col-span-5 space-y-6">
+              <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-800 space-y-6">
+                <h3 class="text-xl font-bold text-white tracking-tight">Connect Directly</h3>
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                  Feel free to reach out for hackathon collaborations, tech discussions, open-source projects, or learning opportunities.
+                </p>
+
+                <div class="space-y-3">
+                  <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                      <div class="p-2.5 rounded-lg bg-blue-950/80 border border-blue-800/40 text-blue-400">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                      </div>
+                      <div>
+                        <div class="text-[11px] font-mono text-slate-400">Email Address</div>
+                        <div id="contact-email-text" class="text-xs sm:text-sm font-semibold text-slate-200">student@example.com</div>
+                      </div>
+                    </div>
+                    <button onclick="copyContactEmail()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors" title="Copy Email">
+                      <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                  </div>
+
+                  <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center gap-3">
+                    <div class="p-2.5 rounded-lg bg-rose-950/80 border border-rose-800/40 text-rose-400">
+                      <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                      <div class="text-[11px] font-mono text-slate-400">Location</div>
+                      <div class="text-xs sm:text-sm font-semibold text-slate-200">Jaipur, Rajasthan, India</div>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-3 pt-1">
+                    <a id="contact-github" href="https://github.com/[Your-GitHub-Username]" target="_blank" rel="noreferrer" class="p-3.5 rounded-xl bg-slate-900/70 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center gap-2.5 text-slate-300 hover:text-white transition-all text-xs font-semibold">
+                      <i data-lucide="github" class="w-4 h-4 text-cyan-400"></i>
+                      <span>GitHub</span>
+                    </a>
+
+                    <a id="contact-linkedin" href="https://linkedin.com/in/[Your-LinkedIn-Username]" target="_blank" rel="noreferrer" class="p-3.5 rounded-xl bg-slate-900/70 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 flex items-center gap-2.5 text-slate-300 hover:text-white transition-all text-xs font-semibold">
+                      <i data-lucide="linkedin" class="w-4 h-4 text-blue-400"></i>
+                      <span>LinkedIn</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Form Column -->
+            <div class="lg:col-span-7">
+              <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 relative">
+                <h3 class="text-xl font-bold text-white tracking-tight mb-2">Send a Message</h3>
+                <p class="text-xs sm:text-sm text-slate-400 mb-6">
+                  Fill in the details below and I'll get back to you as soon as possible.
+                </p>
+
+                <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                      <label class="text-xs font-medium text-slate-300 block">Your Name <span class="text-cyan-400">*</span></label>
+                      <input type="text" id="form-name" required placeholder="e.g. Alex Sharma" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-slate-100 text-xs sm:text-sm placeholder-slate-400 outline-none transition-all">
+                    </div>
+                    <div class="space-y-1.5">
+                      <label class="text-xs font-medium text-slate-300 block">Your Email <span class="text-cyan-400">*</span></label>
+                      <input type="email" id="form-email" required placeholder="e.g. alex@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-slate-100 text-xs sm:text-sm placeholder-slate-400 outline-none transition-all">
+                    </div>
+                  </div>
+
+                  <div class="space-y-1.5">
+                    <label class="text-xs font-medium text-slate-300 block">Message <span class="text-cyan-400">*</span></label>
+                    <textarea id="form-message" rows="4" required placeholder="Write your message, project idea, or inquiry here..." class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-slate-100 text-xs sm:text-sm placeholder-slate-400 outline-none transition-all resize-none"></textarea>
+                  </div>
+
+                  <button type="submit" id="form-submit-btn" class="w-full py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>Send Message</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative border-t border-slate-800/80 bg-dark-950 pt-16 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div class="max-w-7xl mx-auto flex flex-col items-center justify-between gap-8 sm:flex-row">
+        <div class="text-center sm:text-left space-y-2">
+          <div class="flex items-center justify-center sm:justify-start gap-2">
+            <span id="footer-name" class="text-lg font-bold text-white tracking-tight">[Student Name]</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-950 text-cyan-400 border border-blue-800/50">JECRC Univ</span>
+          </div>
+          <p class="text-xs text-slate-400 font-sans max-w-sm">
+            B.Tech CSE | Artificial Intelligence & Machine Learning
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a id="footer-github" href="https://github.com/[Your-GitHub-Username]" target="_blank" rel="noreferrer" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-cyan-400 border border-slate-800 transition-all" title="GitHub">
+            <i data-lucide="github" class="w-4 h-4"></i>
+          </a>
+          <a id="footer-linkedin" href="https://linkedin.com/in/[Your-LinkedIn-Username]" target="_blank" rel="noreferrer" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-blue-400 border border-slate-800 transition-all" title="LinkedIn">
+            <i data-lucide="linkedin" class="w-4 h-4"></i>
+          </a>
+          <a id="footer-email" href="mailto:student@example.com" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-purple-400 border border-slate-800 transition-all" title="Email">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+          </a>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 transition-all ml-2" title="Back to top">
+            <i data-lucide="arrow-up" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+        <p>© 2026 <span id="footer-copy-name">[Student Name]</span>. All Rights Reserved.</p>
+        <p>Crafted for 1st-Year CSE (AI & ML) Portfolio • JECRC Jaipur</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- RESUME MODAL -->
+  <div id="resumeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div class="glass-card rounded-2xl max-w-md w-full p-6 border border-slate-700 relative space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2 text-cyan-400">
+          <i data-lucide="file-down" class="w-4 h-4"></i>
+          <span class="text-xs font-mono font-semibold uppercase tracking-wider">Student Resume</span>
+        </div>
+        <button onclick="closeResumeModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+          <h4 id="resume-modal-name" class="text-base font-bold text-white">[Student Name]</h4>
+          <p class="text-xs font-mono text-cyan-300">B.Tech CSE | Artificial Intelligence & Machine Learning</p>
+          <p class="text-xs text-slate-400">JECRC University, Jaipur • 1st Year Undergrad</p>
+        </div>
+
+        <div class="space-y-2 text-xs text-slate-300">
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
+            <span>Includes Programming & AI/ML coursework</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
+            <span>Academic projects & code repositories</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
+            <span>Certifications & workshop achievements</span>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-lg bg-blue-950/40 border border-blue-800/40 text-[11px] font-mono text-slate-400">
+          💡 <em>To link your real PDF, simply place your resume in this folder or link your Google Drive PDF link!</em>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 pt-2">
+        <button onclick="closeResumeModal()" class="flex-1 py-2.5 rounded-xl text-xs font-medium bg-slate-900 text-slate-300 hover:text-white border border-slate-800">
+          Close
+        </button>
+        <button onclick="downloadResumeAction()" class="flex-1 py-2.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex items-center justify-center gap-1.5 shadow-md">
+          <i data-lucide="file-down" class="w-3.5 h-3.5"></i>
+          <span>Download PDF</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT DEMO MODAL -->
+  <div id="projectModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div class="glass-card rounded-2xl max-w-lg w-full p-6 border border-slate-700 relative space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <span id="proj-modal-number" class="text-xs font-mono text-cyan-400">Project Overview</span>
+        <button onclick="closeProjectModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <h3 id="proj-modal-title" class="text-xl font-bold text-white">Project Title</h3>
+        <p id="proj-modal-desc" class="text-slate-300 text-sm leading-relaxed">Description goes here...</p>
+
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-400 font-mono">
+          🚀 <em>To link a live deployed demo (e.g. on Vercel, Streamlit, or GitHub Pages), update the project card href attribute!</em>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button onclick="closeProjectModal()" class="px-4 py-2 rounded-xl text-xs font-medium bg-slate-800 text-slate-300 hover:text-white">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE CUSTOMIZER MODAL -->
+  <div id="customizerModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+    <div class="glass-card rounded-2xl max-w-xl w-full p-6 border border-slate-700 relative max-h-[90vh] overflow-y-auto space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i>
+          <span class="text-sm font-bold text-white">Live Customizer & Quick Personalization</span>
+        </div>
+        <button onclick="closeCustomizer()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-300">
+        Enter your real details below to instantly update the portfolio in real-time.
+      </p>
+
+      <form onsubmit="applyCustomProfile(event)" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div class="space-y-1">
+            <label class="text-xs font-semibold text-slate-300">Your Full Name</label>
+            <input type="text" id="cust-name" value="Shashwat Sharma" placeholder="e.g. Shashwat Sharma" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white focus:border-cyan-400 outline-none">
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-semibold text-slate-300">Initials</label>
+            <input type="text" id="cust-initials" value="SS" placeholder="e.g. SS" maxlength="4" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white focus:border-cyan-400 outline-none">
+          </div>
+          <div class="space-y-1 sm:col-span-2">
+            <label class="text-xs font-semibold text-slate-300">School Name (Class XII)</label>
+            <input type="text" id="cust-school" value="St. Xavier's Senior Secondary School" placeholder="e.g. Delhi Public School" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white focus:border-cyan-400 outline-none">
+          </div>
+          <div class="space-y-1 sm:col-span-2">
+            <label class="text-xs font-semibold text-slate-300">Email Address</label>
+            <input type="email" id="cust-email" value="shashwat.aiml@jecrc.ac.in" placeholder="e.g. student@jecrc.ac.in" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white focus:border-cyan-400 outline-none">
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-semibold text-slate-300">GitHub Profile URL</label>
+            <input type="text" id="cust-github" value="https://github.com/shashwat-aiml" placeholder="https://github.com/username" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white focus:border-cyan-400 outline-none">
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-semibold text-slate-300">LinkedIn Profile URL</label>
+            <input type="text" id="cust-linkedin" value="https://linkedin.com/in/shashwat-aiml" placeholder="https://linkedin.com/in/username" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white focus:border-cyan-400 outline-none">
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-slate-800">
+          <button type="button" onclick="resetToPlaceholders()" class="px-3 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white bg-slate-900 border border-slate-800">
+            Reset Placeholders
+          </button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md">
+            Apply Live Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Canvas Neural Particle Animation
+    (function initNeuralCanvas() {
+      const canvas = document.getElementById('neuralCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particleCount = Math.min(Math.floor((width * height) / 18000), 75);
+      const particles = [];
+      const mouse = { x: null, y: null, radius: 140 };
+
+      window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+      window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+      const colors = ['#3B82F6', '#8B5CF6', '#06B6D4'];
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.7,
+          vy: (Math.random() - 0.5) * 0.7,
+          radius: Math.random() * 2 + 1.2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          baseAlpha: Math.random() * 0.4 + 0.2,
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p1 = particles[i];
+          p1.x += p1.vx;
+          p1.y += p1.vy;
+
+          if (p1.x < 0 || p1.x > width) p1.vx *= -1;
+          if (p1.y < 0 || p1.y > height) p1.vy *= -1;
+
+          if (mouse.x !== null && mouse.y !== null) {
+            const dx = mouse.x - p1.x;
+            const dy = mouse.y - p1.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < mouse.radius) {
+              const angle = Math.atan2(dy, dx);
+              p1.x -= Math.cos(angle) * 0.8;
+              p1.y -= Math.sin(angle) * 0.8;
+            }
+          }
+
+          ctx.beginPath();
+          ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p1.color;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = p1.color;
+          ctx.globalAlpha = p1.baseAlpha;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 130) {
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = p1.color;
+              ctx.globalAlpha = (1 - dist / 130) * 0.22;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // Typewriter effect
+    (function initTypewriter() {
+      const phrases = [
+        'AI & Machine Learning Student',
+        'B.Tech CSE @ JECRC University',
+        'Python & Problem Solving Enthusiast',
+        'Aspiring AI/ML Engineer',
+      ];
+      let phraseIdx = 0;
+      let charIdx = 0;
+      let isDeleting = false;
+      const el = document.getElementById('typewriter');
+
+      function type() {
+        const current = phrases[phraseIdx];
+        if (isDeleting) {
+          el.textContent = '> ' + current.substring(0, charIdx - 1);
+          charIdx--;
+        } else {
+          el.textContent = '> ' + current.substring(0, charIdx + 1);
+          charIdx++;
+        }
+
+        let speed = isDeleting ? 40 : 80;
+
+        if (!isDeleting && charIdx === current.length) {
+          speed = 2000;
+          isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+          isDeleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          speed = 300;
+        }
+
+        setTimeout(type, speed);
+      }
+      setTimeout(type, 500);
+    })();
+
+    // Scroll Navbar Styling & ScrollSpy
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 20) {
+        navbar.classList.add('glass-nav', 'py-3.5', 'shadow-lg');
+        navbar.classList.remove('bg-transparent', 'py-5');
+      } else {
+        navbar.classList.remove('glass-nav', 'py-3.5', 'shadow-lg');
+        navbar.classList.add('bg-transparent', 'py-5');
+      }
+    });
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Skill Category Filtering
+    function filterSkills(cat) {
+      document.querySelectorAll('.skill-tab-btn').forEach(btn => {
+        btn.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-indigo-600', 'text-white', 'shadow-md');
+        btn.classList.add('bg-dark-900/80', 'text-slate-400', 'border', 'border-slate-800');
+      });
+      event.target.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-indigo-600', 'text-white', 'shadow-md');
+      event.target.classList.remove('bg-dark-900/80', 'text-slate-400');
+
+      document.querySelectorAll('.skill-card-block').forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-category') === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Modal helpers
+    function openResumeModal() {
+      document.getElementById('resumeModal').classList.remove('hidden');
+    }
+    function closeResumeModal() {
+      document.getElementById('resumeModal').classList.add('hidden');
+    }
+    function downloadResumeAction() {
+      showToast('Resume placeholder active. Replace with your custom PDF file!');
+      closeResumeModal();
+    }
+
+    function openCustomizer() {
+      document.getElementById('customizerModal').classList.remove('hidden');
+    }
+    function closeCustomizer() {
+      document.getElementById('customizerModal').classList.add('hidden');
+    }
+
+    function previewProjectModal(num) {
+      const titles = {
+        '02': 'AI/ML Beginner Project',
+        '03': 'Python Problem-Solving Project'
+      };
+      const descs = {
+        '02': 'A beginner-level machine learning model exploring exploratory data analysis, data normalization, and classification using Python, Pandas, and Scikit-Learn.',
+        '03': 'A modular Python project applying clean algorithmic structures, object-oriented concepts, and command-line automation.'
+      };
+      document.getElementById('proj-modal-number').innerText = 'Project #' + num + ' Overview';
+      document.getElementById('proj-modal-title').innerText = titles[num];
+      document.getElementById('proj-modal-desc').innerText = descs[num];
+      document.getElementById('projectModal').classList.remove('hidden');
+    }
+    function closeProjectModal() {
+      document.getElementById('projectModal').classList.add('hidden');
+    }
+
+    // Toast function
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-message');
+      text.innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 4000);
+    }
+
+    function copyContactEmail() {
+      const email = document.getElementById('contact-email-text').innerText;
+      navigator.clipboard.writeText(email);
+      showToast('Email address copied to clipboard: ' + email);
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('form-submit-btn');
+      btn.innerHTML = '<span>Sending message...</span>';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML = '<i data-lucide="check-circle" class="w-4 h-4"></i><span>Message Sent!</span>';
+        lucide.createIcons();
+        showToast('Thank you! Your message has been sent successfully.');
+        document.getElementById('contactForm').reset();
+        setTimeout(() => {
+          btn.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i><span>Send Message</span>';
+          btn.disabled = false;
+          lucide.createIcons();
+        }, 3000);
+      }, 800);
+    }
+
+    // Apply Live Personalization
+    function applyCustomProfile(e) {
+      e.preventDefault();
+      const name = document.getElementById('cust-name').value || '[Student Name]';
+      const initials = document.getElementById('cust-initials').value || 'SN';
+      const school = document.getElementById('cust-school').value || '[School Name]';
+      const email = document.getElementById('cust-email').value || 'student@example.com';
+      const github = document.getElementById('cust-github').value || 'https://github.com/[Your-GitHub-Username]';
+      const linkedin = document.getElementById('cust-linkedin').value || 'https://linkedin.com/in/[Your-LinkedIn-Username]';
+
+      document.getElementById('page-title').innerText = name + ' | B.Tech CSE (AI & ML) - JECRC University';
+      document.getElementById('nav-name').innerText = name;
+      document.getElementById('nav-initials').innerText = initials;
+      document.getElementById('hero-name').innerText = name;
+      document.getElementById('about-name').innerText = name;
+      document.getElementById('code-name').innerText = '"' + name + '"';
+      document.getElementById('footer-name').innerText = name;
+      document.getElementById('footer-copy-name').innerText = name;
+      document.getElementById('resume-modal-name').innerText = name;
+      document.getElementById('edu-school').innerText = school;
+
+      document.getElementById('contact-email-text').innerText = email;
+      document.getElementById('hero-email').href = 'mailto:' + email;
+      document.getElementById('footer-email').href = 'mailto:' + email;
+
+      document.getElementById('hero-github').href = github;
+      document.getElementById('contact-github').href = github;
+      document.getElementById('footer-github').href = github;
+
+      document.getElementById('hero-linkedin').href = linkedin;
+      document.getElementById('contact-linkedin').href = linkedin;
+      document.getElementById('footer-linkedin').href = linkedin;
+
+      closeCustomizer();
+      showToast('Portfolio updated live with your personal details!');
+    }
+
+    function resetToPlaceholders() {
+      document.getElementById('cust-name').value = '[Student Name]';
+      document.getElementById('cust-initials').value = 'SN';
+      document.getElementById('cust-school').value = '[School Name]';
+      document.getElementById('cust-email').value = 'student@example.com';
+      document.getElementById('cust-github').value = 'https://github.com/[Your-GitHub-Username]';
+      document.getElementById('cust-linkedin').value = 'https://linkedin.com/in/[Your-LinkedIn-Username]';
+      showToast('Reset form to default placeholders.');
+    }
+  </script>
+</body>
+</html>
