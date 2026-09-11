@@ -7,8 +7,8 @@
 
 export const portfolioData = {
   personal: {
-    name: "[Student Name]",
-    initials: "SN",
+    name: "Shashwat Bhatt",
+    initials: "SB",
     role: "B.Tech CSE | Artificial Intelligence & Machine Learning",
     year: "1st Year Student",
     university: "JECRC University",
@@ -22,10 +22,10 @@ export const portfolioData = {
   },
 
   socials: {
-    github: "https://github.com/[Your-GitHub-Username]",
-    linkedin: "https://linkedin.com/in/[Your-LinkedIn-Username]",
-    email: "student@example.com",
-    twitter: "https://twitter.com/[Your-Twitter-Username]",
+    github: "https://github.com/shashwatbhatt",
+    linkedin: "https://linkedin.com/in/shashwatbhatt",
+    email: "shashwat.bhatt@jecrc.ac.in",
+    twitter: "https://twitter.com/shashwatbhatt",
   },
 
   stats: [
