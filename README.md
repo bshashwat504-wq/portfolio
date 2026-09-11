@@ -51,7 +51,7 @@ A modern, professional, dark-themed personal portfolio website for **Shashwat Bh
    - 6-step roadmap from Year 1 CS fundamentals to becoming a skilled AI/ML Engineer.
 10. **Contact Section**:
     - Working interactive message form with instant feedback.
-    - One-click copy for email (`shashwat.bhatt@jecrc.ac.in`).
+    - One-click copy for email (`bshashwat504@gmail.com`).
     - Campus location: *Jaipur, Rajasthan, India*.
 11. **Footer**:
     - Shashwat Bhatt branding, credentials, copyright, and smooth back-to-top button.

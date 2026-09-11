@@ -22,9 +22,9 @@ export const portfolioData = {
   },
 
   socials: {
-    github: "https://github.com/shashwatbhatt",
+    github: "https://github.com/bshashwat504-wq",
     linkedin: "https://linkedin.com/in/shashwatbhatt",
-    email: "shashwat.bhatt@jecrc.ac.in",
+    email: "bshashwat504@gmail.com",
     twitter: "https://twitter.com/shashwatbhatt",
   },
 
