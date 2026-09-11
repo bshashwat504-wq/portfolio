@@ -41,7 +41,7 @@ A modern, professional, dark-themed personal portfolio website for **Shashwat Bh
    - Tech tags, GitHub repository links, and interactive live demo preview modals.
 6. **Education Timeline**:
    - **JECRC University** (B.Tech CSE - AI & ML, 1st Year, Jaipur, Rajasthan).
-   - **Senior Secondary School** (Class XII, Science Stream).
+   - **Maheshwari Public School** (Class XII, Science Stream, Jaipur).
 7. **Achievements & Certifications**:
    - Category filtering for Certifications, Hackathons, Workshops, and Academic Milestones.
 8. **Currently Learning**:
