@@ -148,7 +148,7 @@ export const portfolioData = {
   achievements: [
     {
       type: "Certification",
-      title: "[Certification Name]",
+      title: "Introduction to Java Programming: Writing Good Code",
       issuer: "Issuing Organization / Platform (e.g. Coursera / NPTEL / Kaggle)",
       year: "2025 - 2026",
       description: "Completed comprehensive coursework covering core concepts and hands-on exercises.",
@@ -156,11 +156,11 @@ export const portfolioData = {
     },
     {
       type: "Hackathon / Competition",
-      title: "[Hackathon / Coding Competition Name]",
-      issuer: "University / Technical Society",
-      year: "2025 - 2026",
+      title: "CodeSprint Hackathon 2026",
+      issuer: "Computer Science Technical Society",
+      year: "2026",
       description: "Collaborated with peers to build innovative software solutions under timed competition conditions.",
-      badge: "Participant / Winner",
+      badge: "Participant",
     },
     {
       type: "Workshop",
